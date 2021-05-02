@@ -26,7 +26,7 @@ export const Sidebar: FC = () => {
          {/*<SidebarOption Icon={Apps} title="Apps" />*/}
          {/*<SidebarOption Icon={FileCopy} title="File browser" />*/}
          {/*<SidebarOption Icon={ExpandLess} title="Show less " />*/}
-         {/*<SidebarOption />*/}
+         <SidebarOption />
       </SidebarContainer>
    </>
 }

@@ -2,6 +2,7 @@ import {FC, ReactNode} from "react";
 import { SidebarOptionContainer, SidebarOptionChannel } from "./SidebarOptionStyle";
 import { SvgIconProps } from "@material-ui/core";
 import { SidbarMenuItems } from "./sidebarMenuList/SidebarMenuList";
+import { SideBarMenuItem } from "./sidebarMenuList/SidebarMenuItem";
 
 type SidebarOptionProps = {
    Icon?: (props: SvgIconProps) => JSX.Element;
@@ -20,13 +21,13 @@ export const SidebarOption: FC<SidebarOptionProps> = ({Icon, title}) => {
             {/*      <span>#</span> {title}*/}
             {/*   </SidebarOptionChannel>*/}
             {/*)}*/}
-            {/*{SidbarMenuItems.map((items)=> {*/}
-            {/*   return (*/}
-            {/*      <div key={Math.random() * 100}>*/}
-            {/*         /!*<SidebarMenuItem {...items} key={Math.random() * 100}/>*!/*/}
-            {/*      </div>*/}
-            {/*   )*/}
-            {/*})}*/}
+            {SidbarMenuItems.map((items)=> {
+               return (
+                  <div key={Math.random() * 100}>
+                     <SideBarMenuItem {...items} key={Math.random() * 100}/>
+                  </div>
+               )
+            })}
          </SidebarOptionContainer>
       </>
    )
