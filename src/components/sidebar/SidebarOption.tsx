@@ -20,13 +20,13 @@ export const SidebarOption: FC<SidebarOptionProps> = ({Icon, title}) => {
             {/*      <span>#</span> {title}*/}
             {/*   </SidebarOptionChannel>*/}
             {/*)}*/}
-            {SidbarMenuItems.map((items)=> {
-               return (
-                  <div key={Math.random() * 100}>
-                     {/*<SidebarMenuItem {...items} key={Math.random() * 100}/>*/}
-                  </div>
-               )
-            })}
+            {/*{SidbarMenuItems.map((items)=> {*/}
+            {/*   return (*/}
+            {/*      <div key={Math.random() * 100}>*/}
+            {/*         /!*<SidebarMenuItem {...items} key={Math.random() * 100}/>*!/*/}
+            {/*      </div>*/}
+            {/*   )*/}
+            {/*})}*/}
          </SidebarOptionContainer>
       </>
    )
