@@ -9,7 +9,9 @@ import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import AppsIcon from "@material-ui/icons/Apps";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AddIcon from "@material-ui/icons/Add";
 
+let addChannelOption;
 export const SidbarMenuItems = [
    {
       name: "Threads",
@@ -29,11 +31,16 @@ export const SidbarMenuItems = [
    {
       name: "Channel Browser",
       link: "/channelBrowser",
-      Icon: PeopleAltIcon
+      Icon: BookmarkBorderIcon
    },
    {
       name: "People & user groups",
-      link: "/Apps",
+      link: "/people",
+      Icon: PeopleAltIcon
+   },
+   {
+      name: "Apps",
+      link: "/apps",
       Icon: AppsIcon
    },
    {
@@ -44,5 +51,14 @@ export const SidbarMenuItems = [
    {
       name: "ShowLess",
       Icon: ExpandLessIcon
+   },
+   {
+      name:"Channel",
+      Icon: ExpandMoreIcon
+   },
+   {
+      name: "Add Channel",
+      Icon: AddIcon,
+      addChannelOption
    }
 ]

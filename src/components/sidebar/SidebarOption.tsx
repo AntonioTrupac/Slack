@@ -4,27 +4,17 @@ import { SvgIconProps } from "@material-ui/core";
 import { SidbarMenuItems } from "./sidebarMenuList/SidebarMenuList";
 import { SideBarMenuItem } from "./sidebarMenuList/SidebarMenuItem";
 
-type SidebarOptionProps = {
-   Icon?: (props: SvgIconProps) => JSX.Element;
-   title?: string;
-}
 
-export const SidebarOption: FC<SidebarOptionProps> = ({Icon, title}) => {
+
+export const SidebarOption: FC = () => {
+
    return (
       <>
-         <SidebarOptionContainer >
-            {/*{Icon && (<Icon fontSize="small" style={{padding: 10}} />)}*/}
-            {/*{Icon ? (*/}
-            {/*   <h3>{title}</h3>*/}
-            {/*) : (*/}
-            {/*   <SidebarOptionChannel>*/}
-            {/*      <span>#</span> {title}*/}
-            {/*   </SidebarOptionChannel>*/}
-            {/*)}*/}
+         <SidebarOptionContainer>
             {SidbarMenuItems.map((items)=> {
                return (
                   <div key={Math.random() * 100}>
-                     <SideBarMenuItem {...items} key={Math.random() * 100}/>
+                     <SideBarMenuItem {...items} key={Math.random() * 100} addChannelOption/>
                   </div>
                )
             })}

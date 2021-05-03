@@ -31,6 +31,7 @@ export const SidebarInfo = styled.div`
     font-size: 15px;
     font-weight: 900;
     margin-bottom: 5px;
+    margin-left: 5px;
   }
   
   > h3 {
@@ -38,6 +39,7 @@ export const SidebarInfo = styled.div`
     font-size: 13px;
     font-weight: 400;
     align-items: center;
+    margin-left: 2px;
   }
   
   > h3 > .MuiSvgIcon-root {

@@ -1,11 +1,13 @@
 import React, { FC, forwardRef } from "react";
 import {ListItem} from "@material-ui/core";
 import {NavLink, NavLinkProps} from "react-router-dom";
+import { SidebarListButton } from "../SidebarOptionStyle";
 
 export interface AppMenuItemComponentProps {
    className?: string;
    link?: string | null; //because the InferProps props allows null value
    onClick?: (event: React.MouseEvent<HTMLElement>) => void
+   // addChannelOption?:  wait
 }
 
 export const AppMenuItemComponent: FC<AppMenuItemComponentProps> = (props) => {
@@ -13,12 +15,15 @@ export const AppMenuItemComponent: FC<AppMenuItemComponentProps> = (props) => {
 
    if(!link || typeof link !== "string") {
       return (
+         <SidebarListButton>
          <ListItem button children={children} onClick={onClick} />
+         </SidebarListButton>
       )
    }
 
    return (
       <>
+         <SidebarListButton>
          <ListItem
             button
             // className={className}
@@ -26,6 +31,7 @@ export const AppMenuItemComponent: FC<AppMenuItemComponentProps> = (props) => {
             component={forwardRef((props: NavLinkProps, ref: any) => <NavLink exact {...props} innerRef={ref} />)}
             to={link}
          />
+         </SidebarListButton>
       </>
    )
 }
