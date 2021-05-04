@@ -14,7 +14,7 @@ export const SidebarOption: FC = () => {
             {SidbarMenuItems.map((items)=> {
                return (
                   <div key={Math.random() * 100}>
-                     <SideBarMenuItem {...items} key={Math.random() * 100} addChannelOption/>
+                     <SideBarMenuItem {...items} key={Math.random() * 100} />
                   </div>
                )
             })}

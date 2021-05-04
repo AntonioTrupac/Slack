@@ -1,13 +1,14 @@
 import React, { FC, forwardRef } from "react";
 import {ListItem} from "@material-ui/core";
 import {NavLink, NavLinkProps} from "react-router-dom";
-import { SidebarListButton } from "../SidebarOptionStyle";
+import {SidebarAddedChannel, SidebarListButton} from "../SidebarOptionStyle";
+import {useCollection} from "react-firebase-hooks/firestore";
+import {db} from "../../../firebase";
 
 export interface AppMenuItemComponentProps {
    className?: string;
    link?: string | null; //because the InferProps props allows null value
    onClick?: (event: React.MouseEvent<HTMLElement>) => void
-   // addChannelOption?:  wait
 }
 
 export const AppMenuItemComponent: FC<AppMenuItemComponentProps> = (props) => {

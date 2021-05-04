@@ -11,7 +11,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 
-let addChannelOption;
+
 export const SidbarMenuItems = [
    {
       name: "Threads",
@@ -59,6 +59,6 @@ export const SidbarMenuItems = [
    {
       name: "Add Channel",
       Icon: AddIcon,
-      addChannelOption
+      addChannelOption: true
    }
 ]

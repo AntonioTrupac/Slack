@@ -1,11 +1,14 @@
 import {FC} from "react";
 import { SidebarContainer, SidebarHeader, SidebarInfo } from "./SidebarStyle";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
-import {Create, InsertComment, Inbox, Drafts, BookmarkBorder, FileCopy, PeopleAlt, Apps, ExpandLess, ExpandMore } from "@material-ui/icons";
-import InsertCommentIcon from "@material-ui/icons/InsertComment";
+import { Create } from "@material-ui/icons";
 import { SidebarOption } from "./SidebarOption";
+import {useCollection} from "react-firebase-hooks/firestore";
+import {db} from "../../firebase";
+import { SidebarAddedChannel} from "./SidebarOptionStyle";
 
 export const Sidebar: FC = () => {
+   const [channels, loading, error] = useCollection(db.collection('rooms'));
    return(
       <>
          <SidebarContainer>
@@ -20,7 +23,7 @@ export const Sidebar: FC = () => {
                   <Create />
             </SidebarHeader>
             <SidebarOption />
-            <hr />
+
          </SidebarContainer>
       </>
    )
