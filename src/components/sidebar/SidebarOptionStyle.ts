@@ -31,6 +31,13 @@ export const SidebarListButton = styled.div`
   
 `;
 
+export const SidebarListButtonNoLink = styled.div`
+  > .MuiListItem-button:hover {
+    background-color: #340e36;
+  }
+  
+`;
+
 export const SidebarIcon = styled.div`
   display: flex;
   margin-right: 10px;

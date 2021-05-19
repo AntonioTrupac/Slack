@@ -11,10 +11,12 @@ import { db } from "../../../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useDispatch } from "react-redux";
 import {enterRoom} from "../../../redux/appSlice";
+import firebase from "firebase";
+import {ListItem} from "@material-ui/core";
 
 //react runtime PropTypes
 export const AppMenuItemPropTypes = {
-   name: PropTypes.string.isRequired,
+   name: PropTypes.string,
    link: PropTypes.string,
    Icon: PropTypes.elementType,
    items: PropTypes.array,
@@ -28,12 +30,15 @@ type AppMenuItemPropsWithoutItems = Omit<AppMenuItemPropTypes, 'items'>
 export type AppMenuItemProps = AppMenuItemPropsWithoutItems & {
    items?: AppMenuItemProps[],
    addChannelOption?: boolean;
-   id?: number;
+   id?: string;
+   onClick?: () => void;
+   roomChild?: string
 }
 
 export const SideBarMenuItem: FC<AppMenuItemProps> = (props) => {
-   const { name, link, Icon, items = [], addChannelOption, id } = props;
+   const { name, link, Icon, items = [], addChannelOption, id, roomChild } = props;
    const [channels, loading, error] = useCollection(db.collection('rooms'));
+   const [isChannel, setChannel] = useState(false);
    const dispatch = useDispatch();
 
    const addChannel = () => {
@@ -46,20 +51,21 @@ export const SideBarMenuItem: FC<AppMenuItemProps> = (props) => {
             name: channelName,
          })
       }
+      setChannel(true);
    }
 
    const selectChannel = () => {
-      console.log("SelectChannel");
-      const roomId = channels?.docs.map((room) => {
-         return room.id;
-      })
 
-      if (roomId) {
+      console.log("SelectChannel", id);
+      if (id) {
          dispatch(enterRoom({
-            roomId: roomId
+            roomId: id
          }))
       }
+   }
 
+   const doNothing = () => {
+      console.log("DO NOTHING");
    }
 
 
@@ -67,43 +73,33 @@ export const SideBarMenuItem: FC<AppMenuItemProps> = (props) => {
    const MenuItemRoot = (
       <>
          <AppMenuItemComponent link={link}>
-            <SidebarContent onClick={addChannelOption ? addChannel : selectChannel}>
+            <SidebarContent onClick={addChannelOption ? addChannel : doNothing}>
             {!!Icon && (
                <SidebarIcon>
                   <Icon />
                </SidebarIcon>
             )}
-            {Icon ? (
+            {Icon && (
                <h3>{name}</h3>
-            ) : (
-               <SidebarOptionChannel>
-                  <span>#</span> {name}
-               </SidebarOptionChannel>
             )}
             </SidebarContent>
          </AppMenuItemComponent>
       </>
    )
+   // to tu je onaj dio di je samo padding smrdan
+   const AddedChannels =  (
+      <>
+         <div onClick={selectChannel} key={id} id={id}>
+            <SidebarAddedChannel>{roomChild}</SidebarAddedChannel>
+         </div>
+      </>
+   )
+
 
    return (
       <>
-
          {MenuItemRoot}
-         {/*<hr />*/}
-         {addChannelOption && (
-            <>
-               <hr />
-               {channels?.docs.map((room) => {
-                  return (
-                     <>
-                        <div key={room.id} id={room.id}>
-                           <SidebarAddedChannel># {room.data().name}</SidebarAddedChannel>
-                        </div >
-                     </>
-                  )
-               })}
-            </>
-         )}
+         {AddedChannels}
       </>
    )
 }

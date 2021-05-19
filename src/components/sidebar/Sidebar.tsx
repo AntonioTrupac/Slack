@@ -23,7 +23,6 @@ export const Sidebar: FC = () => {
                   <Create />
             </SidebarHeader>
             <SidebarOption />
-
          </SidebarContainer>
       </>
    )

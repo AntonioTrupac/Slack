@@ -10,6 +10,7 @@ import { AppBody } from "./AppBodyStyle";
 //components
 import { Header } from "./components/header/Header";
 import { Sidebar } from "./components/sidebar/Sidebar";
+import {Chat} from "./components/chat/Chat";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
            <Sidebar />
            <Switch>
              <Route exact path="/">
-               {/*{TU IDE CHAT}*/}
+                <Chat />
              </Route>
            </Switch>
          </AppBody>

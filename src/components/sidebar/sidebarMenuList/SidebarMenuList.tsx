@@ -16,45 +16,54 @@ export const SidbarMenuItems = [
    {
       name: "Threads",
       link: "/threads",
-      Icon: InsertCommentIcon
+      Icon: InsertCommentIcon,
+      addChannelOption: false
    },
    {
       name: "Mentions & reactions",
       link: "/mentions",
-      Icon: InboxIcon
+      Icon: InboxIcon,
+      addChannelOption: false
    },
    {
       name: "Saved items",
       link: "/savedItems",
-      Icon: DraftsIcon
+      Icon: DraftsIcon,
+      addChannelOption: false
    },
    {
       name: "Channel Browser",
       link: "/channelBrowser",
-      Icon: BookmarkBorderIcon
+      Icon: BookmarkBorderIcon,
+      addChannelOption: false
    },
    {
       name: "People & user groups",
       link: "/people",
-      Icon: PeopleAltIcon
+      Icon: PeopleAltIcon,
+      addChannelOption: false
    },
    {
       name: "Apps",
       link: "/apps",
-      Icon: AppsIcon
+      Icon: AppsIcon,
+      addChannelOption: false
    },
    {
       name: "File browser",
       link: "/fileBrowser",
-      Icon: FileCopyIcon
+      Icon: FileCopyIcon,
+      addChannelOption: false
    },
    {
       name: "ShowLess",
-      Icon: ExpandLessIcon
+      Icon: ExpandLessIcon,
+      addChannelOption: false
    },
    {
       name:"Channel",
-      Icon: ExpandMoreIcon
+      Icon: ExpandMoreIcon,
+      addChannelOption: false
    },
    {
       name: "Add Channel",
