@@ -9,6 +9,7 @@ import firebase from 'firebase';
 type ChatInputProps = {
    channelName?: string;
    channelId: string | null;
+   chatRef?: any;
 }
 
 export const ChatInput: FC<ChatInputProps> = (props) => {
@@ -27,7 +28,15 @@ export const ChatInput: FC<ChatInputProps> = (props) => {
            user: 'Antonio Trupac',
            userImage: 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Arrow-right-small.svg'
      })
-     console.log("Input ref value", input);
+     //kad se posalje poruka
+     if(props.chatRef && props.chatRef.current){
+        if(typeof props.chatRef?.current?.scrollIntoView === 'function') {
+           props.chatRef?.current?.scrollIntoView({
+              behavior: "smooth"
+           });
+        }
+     }
+
      setInput("");
   }
 

@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React, {FC, useEffect, useRef} from 'react';
 
 //styled comp
-import { ChatContainer, Header, HeaderLeft, HeaderRight, ChatMessages } from "./ChatStyle";
+import { ChatContainer, Header, HeaderLeft, HeaderRight, ChatMessages, ChatBottom } from "./ChatStyle";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import {useSelector} from "react-redux";
@@ -14,11 +14,12 @@ import { Message } from "./Message";
 
 
 export const Chat: FC = () => {
+   const chatRef = useRef<any>(null);
    const roomId = useSelector(selectRoomId);
    const [roomDetails] = useDocument(
       roomId && db.collection('rooms').doc(roomId)
    );
-   const [roomMessage] = useCollection(
+   const [roomMessage, loading] = useCollection(
       roomId &&
          db.collection('rooms')
          .doc(roomId)
@@ -26,48 +27,62 @@ export const Chat: FC = () => {
          .orderBy('timestamp', 'asc')
    );
 
-   console.log("room details", roomDetails?.data());
-   console.log("room messages", roomMessage);
+   useEffect(() => {
+      if(chatRef && chatRef.current){
+         if(typeof chatRef?.current?.scrollIntoView === 'function') {
+            chatRef?.current?.scrollIntoView({
+               behavior: "smooth"
+            });
+         }
+      }
+   }, [roomId, loading])
+
+   // console.log("room details", roomDetails?.data());
+   // console.log("room messages", roomMessage);
 
    return (
       <ChatContainer >
-         <>
-            <Header>
-               <HeaderLeft>
-                  <h4>
-                     <strong>
-                        #{roomDetails?.data()?.name}
-                     </strong>
-                  </h4>
-                  <StarBorderOutlinedIcon />
-               </HeaderLeft>
-               <HeaderRight>
-                  <p>
-                     <InfoOutlinedIcon /> Details
-                  </p>
-               </HeaderRight>
-            </Header>
+         {roomDetails && roomMessage && (
+            <>
+               <Header>
+                  <HeaderLeft>
+                     <h4>
+                        <strong>
+                           #{roomDetails?.data()?.name}
+                        </strong>
+                     </h4>
+                     <StarBorderOutlinedIcon />
+                  </HeaderLeft>
+                  <HeaderRight>
+                     <p>
+                        <InfoOutlinedIcon /> Details
+                     </p>
+                  </HeaderRight>
+               </Header>
 
-            <ChatMessages>
-               {roomMessage?.docs.map( doc => {
-                  const { message, timestamp, user, userImage } = doc.data();
+               <ChatMessages>
+                  {roomMessage?.docs.map( doc => {
+                     const { message, timestamp, user, userImage } = doc.data();
 
-                  return(
-                     <Message
-                        key={doc.id}
-                        message={message}
-                        timestamp={timestamp}
-                        user={user}
-                        userImage={userImage}
-                     />
-                  )
-               })}
-            </ChatMessages>
-            <ChatInput
-               channelName={roomDetails?.data()?.name}
-               channelId={roomId}
-            />
-         </>
+                     return(
+                        <Message
+                           key={doc.id}
+                           message={message}
+                           timestamp={timestamp}
+                           user={user}
+                           userImage={userImage}
+                        />
+                     )
+                  })}
+                  <ChatBottom ref={chatRef}/>
+               </ChatMessages>
+               <ChatInput
+                  chatRef={chatRef}
+                  channelName={roomDetails?.data()?.name}
+                  channelId={roomId}
+               />
+            </>
+         )}
       </ChatContainer>
    )
 }
