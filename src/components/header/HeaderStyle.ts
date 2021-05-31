@@ -22,6 +22,10 @@ export const HeaderLeft = styled.div`
     margin-right: 30px;
   }
 `
+type HeaderAvatarProps = {
+   src?: string;
+
+}
 
 export const HeaderAvatar = styled(Avatar)`
   cursor: pointer;

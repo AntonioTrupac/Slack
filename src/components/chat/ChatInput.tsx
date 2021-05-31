@@ -2,8 +2,9 @@ import React, {FC, useState} from 'react';
 //styled compo
 import {ChatInputContainer} from "./ChatInputStyle";
 import {Button} from "@material-ui/core";
-import {db} from "../../firebase";
+import {auth, db} from "../../firebase";
 import firebase from 'firebase';
+import {useAuthState} from "react-firebase-hooks/auth";
 
 
 type ChatInputProps = {
@@ -14,6 +15,7 @@ type ChatInputProps = {
 
 export const ChatInput: FC<ChatInputProps> = (props) => {
   const [input, setInput] = useState<string>("");
+  const [user] = useAuthState(auth);
 
   const sendMessage=(e: any) => {
      e.preventDefault();
@@ -25,16 +27,14 @@ export const ChatInput: FC<ChatInputProps> = (props) => {
      db.collection('rooms').doc(props.channelId).collection('messages').add({
            message: input,
            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-           user: 'Antonio Trupac',
-           userImage: 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Arrow-right-small.svg'
+           user: user?.displayName,
+           userImage: user?.photoURL
      })
      //kad se posalje poruka
-     if(props.chatRef && props.chatRef.current){
-        if(typeof props.chatRef?.current?.scrollIntoView === 'function') {
+     if(props.chatRef && props.chatRef.current && props.chatRef.current.scrollIntoView){
            props.chatRef?.current?.scrollIntoView({
               behavior: "smooth"
            });
-        }
      }
 
      setInput("");

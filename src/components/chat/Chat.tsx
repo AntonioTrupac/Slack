@@ -37,9 +37,6 @@ export const Chat: FC = () => {
       }
    }, [roomId, loading])
 
-   // console.log("room details", roomDetails?.data());
-   // console.log("room messages", roomMessage);
-
    return (
       <ChatContainer >
          {roomDetails && roomMessage && (

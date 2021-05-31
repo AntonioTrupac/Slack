@@ -3,22 +3,31 @@ import { HeaderContainer, HeaderLeft, HeaderAvatar, HeaderSearch, HeaderRight } 
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import SearchIcon from "@material-ui/icons/Search";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth} from "../../firebase";
+
 
 export const Header: FC = () => {
+    const [user]  = useAuthState(auth); //ovo je tako glupo napravljeno jako
+
+    const userPhoto: string = user?.photoURL ?? 'n/a';
+    const altName: string = user?.displayName ?? 'n/a';
+
     return (
         <>
             <HeaderContainer>
-            {/*   Header Left */}
                <HeaderLeft>
-                  <HeaderAvatar />
+                     <HeaderAvatar
+                        onClick={() => auth.signOut()}
+                        alt={altName}
+                        src={userPhoto}
+                     />
                   <AccessTimeIcon />
                </HeaderLeft>
-            {/*   Header Search*/}
                <HeaderSearch>
                   <SearchIcon />
                   <input placeholder="Search" />
                </HeaderSearch>
-            {/*   Header Right */}
                <HeaderRight >
                   <HelpOutlineIcon />
                </HeaderRight>
